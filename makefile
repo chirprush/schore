@@ -16,4 +16,4 @@ run: main
 clean:
 	rm $(OUTPUT)
 
-.PHONY: run clean
+.PHONY: main run clean
