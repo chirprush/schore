@@ -5,13 +5,15 @@ LDFLAGS =
 CFLAGS += `pkg-config --cflags sdl2`
 LDFLAGS += `pkg-config --libs sdl2`
 
+OUTPUT = ./bin/main
+
 main:
-	$(CC) $(CFLAGS) $(LDFLAGS) main.c -o main
+	$(CC) $(CFLAGS) $(LDFLAGS) src/main.c -o $(OUTPUT)
 
 run: main
-	./main
+	$(OUTPUT)
 
 clean:
-	rm main
+	rm $(OUTPUT)
 
 .PHONY: run clean
