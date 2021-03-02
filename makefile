@@ -7,13 +7,19 @@ LDFLAGS += `pkg-config --libs sdl2`
 
 OUTPUT = ./bin/main
 
-main:
-	$(CC) $(CFLAGS) $(LDFLAGS) src/main.c -o $(OUTPUT)
+cfiles = $(wildcard src/*.c)
+objects = $(cfiles:src/%.c=bin/%.o)
+
+main: $(objects)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(OUTPUT) $(objects)
+
+$(objects):
+	$(CC) $(CFLAGS) $(LDFLAGS) -c $(@:bin/%.o=src/%.c) -o $@
 
 run: main
 	$(OUTPUT)
 
 clean:
-	rm $(OUTPUT)
+	rm bin/*
 
 .PHONY: main run clean
