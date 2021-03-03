@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g
+CFLAGS = -g -Wno-int-conversion
 LDFLAGS =
 
 CFLAGS += `pkg-config --cflags sdl2`
