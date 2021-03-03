@@ -11,10 +11,10 @@ cfiles = $(wildcard src/*.c)
 objects = $(cfiles:src/%.c=bin/%.o)
 
 main: $(objects)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $(OUTPUT) $(objects)
+	$(CC) -o $(OUTPUT) $(objects) $(CFLAGS) $(LDFLAGS)
 
 $(objects):
-	$(CC) $(CFLAGS) $(LDFLAGS) -c $(@:bin/%.o=src/%.c) -o $@
+	$(CC) -c $(@:bin/%.o=src/%.c) -o $@ $(CFLAGS) $(LDFLAGS)
 
 run: main
 	$(OUTPUT)
