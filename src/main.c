@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "window.h"
 #include "result.h"
+#include "color.h"
 
 int main(int argc, char *argv[]) {
 	WindowResult win_result = window_new("Schore", 600, 600);
@@ -10,7 +11,7 @@ int main(int argc, char *argv[]) {
 		return win_result.value.err_value;
 	}
 	Window window = win_result.value.ok_value;
-	SDL_SetRenderDrawColor(window.renderer, 0x1d, 0x20, 0x21, 0xff);
+	const Color bg = color_new(0x1d, 0x20, 0x21, 0xff);
 	int running = 1;
 	SDL_Event e;
 	while (running) {
@@ -21,12 +22,11 @@ int main(int argc, char *argv[]) {
 				break;
 			}
 		}
-		SDL_RenderClear(window.renderer);
-		SDL_RenderPresent(window.renderer);
-		SDL_Delay(1.0f / 60);
+		window_clear(&window, &bg);
+		window_present(&window);
+		window_delay(1.0f / 60);
 	}
-	SDL_DestroyRenderer(window.renderer);
-	SDL_DestroyWindow(window.window);
-	SDL_Quit();
+	window_free(&window);
+	window_quit();
 	return 0;
 }
