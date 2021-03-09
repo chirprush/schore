@@ -4,10 +4,10 @@
 #include "int_types.h"
 
 typedef struct Vec {
-	s16 x;
-	s16 y;
+	s32 x;
+	s32 y;
 } Vec;
 
-Vec vec_new(s16 x, s16 y);
+Vec vec_new(s32 x, s32 y);
 
 #endif // VEC_H

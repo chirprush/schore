@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "event.h"
 #include "window.h"
 #include "result.h"
 #include "color.h"
@@ -12,13 +13,15 @@ int main(int argc, char *argv[]) {
 	}
 	Window window = win_result.value.ok_value;
 	const Color bg = color_new(0x1d, 0x20, 0x21, 0xff);
-	int running = 1;
-	SDL_Event e;
-	while (running) {
-		while (SDL_PollEvent(&e)) {
+	Event e = {0};
+	while (window.running) {
+		while (event_poll_event(&e)) {
 			switch (e.type) {
-			case SDL_QUIT:
-				running = 0;
+			case EVENT_QUIT:
+				window.running = 0;
+				break;
+			case EVENT_MOUSE_MOVE:
+				printf("Mouse: (%d, %d)\n", e.data.pos.x, e.data.pos.y);
 				break;
 			}
 		}
