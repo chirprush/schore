@@ -5,6 +5,8 @@ LDFLAGS =
 CFLAGS += `pkg-config --cflags sdl2`
 LDFLAGS += `pkg-config --libs sdl2`
 
+LDFLAGS += `pkg-config --libs SDL2_ttf`
+
 OUTPUT = ./bin/main
 
 cfiles = $(wildcard src/*.cpp)
