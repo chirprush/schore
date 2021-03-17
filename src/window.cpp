@@ -2,6 +2,7 @@
 #include "window.hpp"
 
 Window::Window(const char *title, int w, int h) {
+	SDL_Init(SDL_INIT_VIDEO);
 	this->w = w;
 	this->h = h;
 	this->running = true;
@@ -15,6 +16,11 @@ Window::~Window() {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
+}
+
+void Window::renderLine(int x1, int y1, int x2, int y2, const Color &color) {
+	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+	SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
 }
 
 void Window::renderRect(int x, int y, int w, int h, const Color &color) {
