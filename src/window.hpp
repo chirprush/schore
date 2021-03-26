@@ -6,6 +6,7 @@
 #include <vector>
 #include <map>
 #include "color.hpp"
+#include "rect.hpp"
 
 struct Window {
 	SDL_Window *window;
@@ -22,14 +23,13 @@ struct Window {
 	Window(const char *title, int w, int h, const char *font_path);
 	~Window();
 
-	void renderLine(int x1, int y1, int x2, int y2, const Color &color);
-	void renderRect(int x, int y, int w, int h, const Color &color);
-	void renderText(const char *text, int ftsize, int x, int y, const Color &color);
+	void renderLine(const Vec2 &pos1, const Vec2 &pos2, const Color &color);
+	void renderRect(const Rect &rect, const Color &color);
 
 	void clear(const Color &color);
 	void present();
 
-	void delay(int ms);
+	void delay(float s);
 };
 
 #endif // WINDOW_HPP

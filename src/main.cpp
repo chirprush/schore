@@ -1,29 +1,34 @@
 #include <SDL2/SDL.h>
 #include "color.hpp"
+#include "ui.hpp"
+#include "label.hpp"
+#include "rect.hpp"
 #include "event.hpp"
 #include "window.hpp"
 
 constexpr Color BACKGROUND_COLOR = 0x1d2021;
 constexpr Color TEXT_COLOR = 0x61afef;
-constexpr int delay = 1000 / 30;
+constexpr float delay = 1.0f / 30;
 
 int main(int argc, char *argv[]) {
-	Window window = Window("Schore", 1920, 1080, "./fonts/Hack-Regular-Nerd-Font-Complete.ttf");
+	Window win = Window("Schore", 1920, 1080, "./fonts/Hack-Regular-Nerd-Font-Complete.ttf");
+	const Rect bounds = Rect(Vec2(0, 0), win.w, win.h);
+	auto ui = Ui(new Label("Hello", 20, 0x61afef));
 	Event e = {};
-	while (window.running) {
+	while (win.running) {
 		while (Event::get_event(&e)) {
 			switch (e.type) {
 			case EventType::Quit:
-				window.running = false;
+				win.running = false;
 				break;
 			default:
 				break;
 			}
 		}
-		window.clear(BACKGROUND_COLOR);
-		window.renderText("Hello, World!", 20, 0, 0, TEXT_COLOR);
-		window.present();
-		window.delay(delay);
+		win.clear(BACKGROUND_COLOR);
+		ui.render(win, bounds);
+		win.present();
+		win.delay(delay);
 	}
 	return 0;
 }
