@@ -12,9 +12,11 @@ struct Window {
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 	const char *font_path;
-	// SDL requires that you pass in the font name AND the font size
-	// to create a TTF_Font *. Because we would ideally want multiple
-	// text sizes, we create a font cache using a map.
+	/*
+	 * SDL requires that you pass in the font name AND the font size
+	 * to create a TTF_Font *. Because we would ideally want multiple
+	 * text sizes, we create a font cache using a map.
+	*/
 	std::map<int, TTF_Font *> fonts;
 	bool running;
 	int w;

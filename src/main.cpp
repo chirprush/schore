@@ -7,13 +7,12 @@
 #include "window.hpp"
 
 constexpr Color BACKGROUND_COLOR = 0x1d2021;
-constexpr Color TEXT_COLOR = 0x61afef;
 constexpr float delay = 1.0f / 30;
 
 int main(int argc, char *argv[]) {
 	Window win = Window("Schore", 1920, 1080, "./fonts/Hack-Regular-Nerd-Font-Complete.ttf");
 	const Rect bounds = Rect(Vec2(0, 0), win.w, win.h);
-	auto ui = Ui(new Label("Hello", 20, 0x61afef));
+	auto ui = Ui(new HorSplit(new ColoredRect(0x0055a4), new HorSplit(new ColoredRect(0xffffff), new ColoredRect(0xef4135), 0.50f), 0.33f));
 	Event e = {};
 	while (win.running) {
 		while (Event::get_event(&e)) {
