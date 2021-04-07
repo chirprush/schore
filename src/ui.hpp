@@ -32,24 +32,24 @@ struct Length {
 	bool is_per() const;
 };
 
-struct VertSplit : Widget {
-	Widget *left;
-	Widget *right;
-	Length length;
-
-	VertSplit(Widget *left, Widget *right, const Length &length);
-
-	void render(Window &win, const Rect &bounds) const;
-	void update(Window &win);
-	void free();
-};
-
 struct HorSplit : Widget {
 	Widget *left;
 	Widget *right;
 	Length length;
 
 	HorSplit(Widget *left, Widget *right, const Length &length);
+
+	void render(Window &win, const Rect &bounds) const;
+	void update(Window &win);
+	void free();
+};
+
+struct VertSplit : Widget {
+	Widget *left;
+	Widget *right;
+	Length length;
+
+	VertSplit(Widget *left, Widget *right, const Length &length);
 
 	void render(Window &win, const Rect &bounds) const;
 	void update(Window &win);

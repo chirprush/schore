@@ -1,16 +1,23 @@
 #ifndef LABEL_HPP
 #define LABEL_HPP
 
+#include <SDL2/SDL_ttf.h>
+#include <string>
 #include "window.hpp"
 #include "color.hpp"
 #include "widget.hpp"
 
+constexpr int NORMAL = TTF_STYLE_NORMAL;
+constexpr int BOLD = TTF_STYLE_BOLD;
+constexpr int ITALIC = TTF_STYLE_ITALIC;
+
 struct Label : Widget {
-	const char *text;
+	std::string text;
 	int ftsize;
+	int style;
 	Color color;
 
-	Label(const char *text, int ftsize, const Color &color);
+	Label(std::string text, int ftsize, int style, const Color &color);
 
 	void render(Window &win, const Rect &bounds) const;
 	void update(Window &win);

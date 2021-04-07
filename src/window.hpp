@@ -27,6 +27,10 @@ struct Window {
 
 	void renderLine(const Vec2 &pos1, const Vec2 &pos2, const Color &color);
 	void renderRect(const Rect &rect, const Color &color);
+	void renderCircle(const Vec2 &pos, int radius, const Color &color);
+
+	TTF_Font *ensureFont(int ftsize);
+	int getFontHeight(int ftsize);
 
 	void clear(const Color &color);
 	void present();

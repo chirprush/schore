@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL2_gfxPrimitives.h>
 #include <map>
 #include "window.hpp"
 
@@ -39,6 +40,25 @@ void Window::renderRect(const Rect &bounds, const Color &color) {
 	rect.h = bounds.h;
 	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 	SDL_RenderFillRect(renderer, &rect);
+}
+
+void Window::renderCircle(const Vec2 &pos, int radius, const Color &color) {
+	filledEllipseRGBA(renderer, pos.x, pos.y, radius, radius, color.r, color.g, color.b, color.a);
+}
+
+TTF_Font *Window::ensureFont(int ftsize) {
+	auto it = fonts.find(ftsize);
+	if (it == fonts.end()) {
+		TTF_Font *font = TTF_OpenFont(font_path, ftsize);
+		fonts.insert(std::pair<int, TTF_Font *>(ftsize, font));
+		return font;
+	}
+	return it->second;
+}
+
+int Window::getFontHeight(int ftsize) {
+	TTF_Font *font = ensureFont(ftsize);
+	return TTF_FontHeight(font);
 }
 
 void Window::clear(const Color &color) {

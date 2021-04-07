@@ -36,9 +36,9 @@ bool Length::is_per() const {
 	return type == LengthType::Percent;
 }
 
-VertSplit::VertSplit(Widget *left, Widget *right, const Length &length) : left(left), right(right), length(length) {}
+HorSplit::HorSplit(Widget *left, Widget *right, const Length &length) : left(left), right(right), length(length) {}
 
-void VertSplit::render(Window &win, const Rect &bounds) const {
+void HorSplit::render(Window &win, const Rect &bounds) const {
 	int sep;
 	if (length.is_abs()) {
 		sep = length.absolute;
@@ -51,21 +51,21 @@ void VertSplit::render(Window &win, const Rect &bounds) const {
 	right->render(win, right_bounds);
 }
 
-void VertSplit::update(Window &win) {
+void HorSplit::update(Window &win) {
 	left->update(win);
 	right->update(win);
 }
 
-void VertSplit::free() {
+void HorSplit::free() {
 	left->free();
 	delete left;
 	right->free();
 	delete right;
 }
 
-HorSplit::HorSplit(Widget *left, Widget *right, const Length &length) : left(left), right(right), length(length) {}
+VertSplit::VertSplit(Widget *left, Widget *right, const Length &length) : left(left), right(right), length(length) {}
 
-void HorSplit::render(Window &win, const Rect &bounds) const {
+void VertSplit::render(Window &win, const Rect &bounds) const {
 	int sep;
 	if (length.is_abs()) {
 		sep = length.absolute;
@@ -78,12 +78,12 @@ void HorSplit::render(Window &win, const Rect &bounds) const {
 	right->render(win, right_bounds);
 }
 
-void HorSplit::update(Window &win) {
+void VertSplit::update(Window &win) {
 	left->update(win);
 	right->update(win);
 }
 
-void HorSplit::free() {
+void VertSplit::free() {
 	left->free();
 	delete left;
 	right->free();

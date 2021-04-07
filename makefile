@@ -6,6 +6,7 @@ CFLAGS += `pkg-config --cflags sdl2`
 LDFLAGS += `pkg-config --libs sdl2`
 
 LDFLAGS += `pkg-config --libs SDL2_ttf`
+LDFLAGS += `pkg-config --libs SDL2_gfx`
 
 OUTPUT = ./bin/main
 
