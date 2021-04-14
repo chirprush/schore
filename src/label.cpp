@@ -6,7 +6,7 @@
 #include "color.hpp"
 #include "window.hpp"
 
-Label::Label(std::string text, int ftsize, int style, const Color &color) : text(text), ftsize(ftsize), style(style), color(color) {}
+Label::Label(const std::string &text, int ftsize, int style, const Color &color) : text(text), ftsize(ftsize), style(style), color(color) {}
 
 void Label::render(Window &win, const Rect &bounds) const {
 	TTF_Font *font = win.ensureFont(ftsize);

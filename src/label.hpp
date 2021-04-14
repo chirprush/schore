@@ -17,7 +17,7 @@ struct Label : Widget {
 	int style;
 	Color color;
 
-	Label(std::string text, int ftsize, int style, const Color &color);
+	Label(const std::string &text, int ftsize, int style, const Color &color);
 
 	void render(Window &win, const Rect &bounds) const;
 	void update(Window &win);

@@ -12,21 +12,25 @@
 constexpr int ITEM_YPADDING = 2;
 constexpr int ITEM_XPADDING = 10;
 
+constexpr int ITEM_INDENT = 30;
+
 constexpr Color TOPIC_FG = 0x61afef;
 constexpr Color TEXT_FG = 0xebdbef;
 
-constexpr int TOPIC_RAD = 7;
-constexpr int TOPIC_SPACE = 2 * TOPIC_RAD + 10;
+constexpr int TOPIC_BULLET_RADIUS = 7;
+constexpr int TOPIC_SPACE = 2 * TOPIC_BULLET_RADIUS + 10;
+constexpr int TOPIC_BULLET_THICKNESS = 2;
 
 constexpr int TOPIC_SZ = 25;
 constexpr int TEXT_SZ = 20;
 
-enum class ItemType { Topic, Note, Text };
+enum class ItemType { Topic, Text };
 
 struct Item : Widget {
 	ItemType type;
 	std::string content;
 	std::vector<Item> children;
+	bool focused;
 
 	Item(ItemType type);
 

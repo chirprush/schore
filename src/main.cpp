@@ -16,11 +16,14 @@ int main(int argc, char *argv[]) {
 	const Rect bounds = Rect(Vec2(0, 0), win.w, win.h);
 	auto ed = new Editor();
 	auto text = Item(ItemType::Text);
-	text.content = "text";
+	text.content = "Finish Road to War poster (Thursday)";
 	auto topic = Item(ItemType::Topic);
-	topic.content = "hello";
+	topic.content = "Social Studies";
 	topic.children.push_back(text);
-	ed->items.push_back(topic);
+	auto parent_topic = Item(ItemType::Topic);
+	parent_topic.content = "Homework";
+	parent_topic.children.push_back(topic);
+	ed->items.push_back(parent_topic);
 	Ui ui = Ui(
 		new HorSplit(
 			new ColoredRect(BAR_COLOR),
