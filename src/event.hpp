@@ -33,11 +33,17 @@ struct MouseUpEvent {
 	MouseUpEvent(MouseButton button, int x, int y);
 };
 
+struct ResizeEvent {
+	int w, h;
+
+	ResizeEvent(int w, int h);
+};
+
 struct UnhandledEvent {
 	UnhandledEvent();
 };
 
-enum class EventType { Quit, KeyDown, MouseDown, MouseMove, MouseUp, Unhandled };
+enum class EventType { Quit, KeyDown, MouseDown, MouseMove, MouseUp, Resize, Unhandled };
 
 struct Event {
 	EventType type;
@@ -48,6 +54,7 @@ struct Event {
 		MouseDownEvent mouse_down;
 		MouseMoveEvent mouse_move;
 		MouseUpEvent mouse_up;
+		ResizeEvent resize;
 		UnhandledEvent unhandled;
 	};
 

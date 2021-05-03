@@ -47,6 +47,16 @@ bool Event::get_event(Event *e) {
 		e->mouse_up = MouseUpEvent(button, sdl_event.motion.x, sdl_event.motion.y);
 		break;
 	}
+	case SDL_WINDOWEVENT: {
+		if (sdl_event.window.event == SDL_WINDOWEVENT_RESIZED) {
+			e->type = EventType::Resize;
+			e->resize = ResizeEvent(sdl_event.window.data1, sdl_event.window.data2);
+		} else {
+			e->type = EventType::Unhandled;
+			e->unhandled = UnhandledEvent();
+		}
+		break;
+	}
 	default: {
 		e->type = EventType::Unhandled;
 		e->unhandled = UnhandledEvent();
@@ -77,6 +87,11 @@ MouseUpEvent::MouseUpEvent(MouseButton button, int x, int y) {
 	this->button = button;
 	this->x = x;
 	this->y = y;
+}
+
+ResizeEvent::ResizeEvent(int w, int h) {
+	this->w = w;
+	this->h = h;
 }
 
 UnhandledEvent::UnhandledEvent() {}

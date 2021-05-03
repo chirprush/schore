@@ -9,11 +9,11 @@
 constexpr Color BACKGROUND_COLOR = 0x1d2021;
 constexpr Color BAR_COLOR = 0x2d3031;
 constexpr Color SIDE_PANE_COLOR = 0x242728;
-constexpr float delay = 1.0f / 30;
+constexpr float delay = 1.0f / 60;
 
 int main(int argc, char *argv[]) {
 	Window win = Window("Schore", 1920, 1080, "./fonts/Inconsolata.otf");
-	const Rect bounds = Rect(Vec2(0, 0), win.w, win.h);
+	Rect bounds = Rect(Vec2(0, 0), win.w, win.h);
 	auto ed = new Editor();
 	auto text = Item(ItemType::Text);
 	text.content = "Finish Road to War poster (Thursday)";
@@ -41,6 +41,10 @@ int main(int argc, char *argv[]) {
 			switch (e.type) {
 			case EventType::Quit:
 				win.running = false;
+				break;
+			case EventType::Resize:
+				bounds.w = e.resize.w;
+				bounds.h = e.resize.h;
 				break;
 			default:
 				break;
