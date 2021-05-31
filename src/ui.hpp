@@ -14,7 +14,7 @@ struct Ui : Widget {
 	~Ui();
 
 	void render(Window &win, const Rect &bounds) const;
-	void update(Window &win);
+	void update(Window &win, const Rect &bounds);
 	void free();
 };
 
@@ -40,7 +40,7 @@ struct HorSplit : Widget {
 	HorSplit(Widget *left, Widget *right, const Length &length);
 
 	void render(Window &win, const Rect &bounds) const;
-	void update(Window &win);
+	void update(Window &win, const Rect &bounds);
 	void free();
 };
 
@@ -52,7 +52,7 @@ struct VertSplit : Widget {
 	VertSplit(Widget *left, Widget *right, const Length &length);
 
 	void render(Window &win, const Rect &bounds) const;
-	void update(Window &win);
+	void update(Window &win, const Rect &bounds);
 	void free();
 };
 
@@ -63,7 +63,7 @@ struct ColoredRect : Widget {
 	ColoredRect(Color color);
 
 	void render(Window &win, const Rect &bounds) const;
-	void update(Window &win);
+	void update(Window &win, const Rect &bounds);
 	void free();
 };
 

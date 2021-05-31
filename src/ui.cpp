@@ -14,8 +14,8 @@ void Ui::render(Window &win, const Rect &bounds) const {
 	child->render(win, bounds);
 }
 
-void Ui::update(Window &win) {
-	child->update(win);
+void Ui::update(Window &win, const Rect &bounds) {
+	child->update(win, bounds);
 }
 
 void Ui::free() {}
@@ -51,9 +51,17 @@ void HorSplit::render(Window &win, const Rect &bounds) const {
 	right->render(win, right_bounds);
 }
 
-void HorSplit::update(Window &win) {
-	left->update(win);
-	right->update(win);
+void HorSplit::update(Window &win, const Rect &bounds) {
+	int sep;
+	if (length.is_abs()) {
+		sep = length.absolute;
+	} else {
+		sep = (int)(length.percent * bounds.h);
+	}
+	const Rect &left_bounds = Rect(Vec2(bounds.pos.x, bounds.pos.y), bounds.w, sep);
+	const Rect &right_bounds = Rect(Vec2(bounds.pos.x, bounds.pos.y + sep), bounds.w, bounds.h - sep);
+	left->update(win, left_bounds);
+	right->update(win, right_bounds);
 }
 
 void HorSplit::free() {
@@ -78,9 +86,17 @@ void VertSplit::render(Window &win, const Rect &bounds) const {
 	right->render(win, right_bounds);
 }
 
-void VertSplit::update(Window &win) {
-	left->update(win);
-	right->update(win);
+void VertSplit::update(Window &win, const Rect &bounds) {
+	int sep;
+	if (length.is_abs()) {
+		sep = length.absolute;
+	} else {
+		sep = (int)(length.percent * bounds.h);
+	}
+	const Rect &left_bounds = Rect(Vec2(bounds.pos.x, bounds.pos.y), bounds.w, sep);
+	const Rect &right_bounds = Rect(Vec2(bounds.pos.x, bounds.pos.y + sep), bounds.w, bounds.h - sep);
+	left->update(win, left_bounds);
+	right->update(win, right_bounds);
 }
 
 void VertSplit::free() {
@@ -96,6 +112,6 @@ void ColoredRect::render(Window &win, const Rect &bounds) const {
 	win.renderRect(bounds, color);
 }
 
-void ColoredRect::update(Window &win) {}
+void ColoredRect::update(Window &win, const Rect &bounds) {}
 
 void ColoredRect::free() {}

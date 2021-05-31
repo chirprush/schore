@@ -8,6 +8,10 @@
 #include "color.hpp"
 #include "rect.hpp"
 
+constexpr int TEXT_NORMAL = TTF_STYLE_NORMAL;
+constexpr int TEXT_BOLD = TTF_STYLE_BOLD;
+constexpr int TEXT_ITALIC = TTF_STYLE_ITALIC;
+
 struct Window {
 	SDL_Window *window;
 	SDL_Renderer *renderer;
@@ -21,16 +25,20 @@ struct Window {
 	bool running;
 	int w;
 	int h;
+	int mouseX = 0;
+	int mouseY = 0;
 
 	Window(const char *title, int w, int h, const char *font_path);
 	~Window();
 
 	void renderLine(const Vec2 &pos1, const Vec2 &pos2, const Color &color);
 	void renderRect(const Rect &rect, const Color &color);
+	void renderText(const Vec2 &pos, const char *text, const int ftsize, const Color &color, const int style);
 	void renderCircle(const Vec2 &pos, int radius, const Color &color);
 
 	TTF_Font *ensureFont(int ftsize);
 	int getFontHeight(int ftsize);
+	int getTextWidth(const char* text, int ftsize);
 
 	void clear(const Color &color);
 	void present();

@@ -14,16 +14,11 @@ constexpr float delay = 1.0f / 60;
 int main(int argc, char *argv[]) {
 	Window win = Window("Schore", 1920, 1080, "./fonts/Inconsolata.otf");
 	Rect bounds = Rect(Vec2(0, 0), win.w, win.h);
-	auto ed = new Editor();
-	auto text = Item(ItemType::Text);
-	text.content = "Finish Road to War poster (Thursday)";
-	auto topic = Item(ItemType::Topic);
-	topic.content = "Social Studies";
-	topic.children.push_back(text);
-	auto parent_topic = Item(ItemType::Topic);
-	parent_topic.content = "Homework";
-	parent_topic.children.push_back(topic);
-	ed->items.push_back(parent_topic);
+	Item it = Item(ItemType::Topic, "Topic");
+	Item sub = Item(ItemType::Text, "Topic text");
+	it.children.push_back(sub);
+	Editor *ed = new Editor();
+	ed->children.push_back(it);
 	Ui ui = Ui(
 		new HorSplit(
 			new ColoredRect(BAR_COLOR),
@@ -46,12 +41,17 @@ int main(int argc, char *argv[]) {
 				bounds.w = e.resize.w;
 				bounds.h = e.resize.h;
 				break;
+			case EventType::MouseMove:
+				win.mouseX = e.mouse_move.x;
+				win.mouseY = e.mouse_move.y;
+				break;
 			default:
 				break;
 			}
 		}
 		win.clear(BACKGROUND_COLOR);
 		ui.render(win, bounds);
+		ui.update(win, bounds);
 		win.present();
 		win.delay(delay);
 	}

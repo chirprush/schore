@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <string>
-#include "label.hpp"
 #include "rect.hpp"
 #include "window.hpp"
 #include "color.hpp"
@@ -32,26 +31,24 @@ struct Item : Widget {
 	std::vector<Item> children;
 	bool focused;
 
-	Item(ItemType type);
-
-	Label getLabel() const;
+	Item(ItemType type, std::string content);
 
 	int height(Window &win) const;
 
 	void render(Window &win, const Rect &bounds) const;
-	void update(Window &win);
+	void update(Window &win, const Rect &bounds);
 	void free();
 };
 
 constexpr Color EDITOR_BG = 0x1d2021;
 
 struct Editor : Widget {
-	std::vector<Item> items;
+	std::vector<Item> children;
 
 	Editor();
 
 	void render(Window &win, const Rect &bounds) const;
-	void update(Window &win);
+	void update(Window &win, const Rect &bounds);
 	void free();
 };
 

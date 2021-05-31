@@ -7,7 +7,7 @@
 struct Widget {
 	virtual ~Widget() {}
 	virtual void render(Window &win, const Rect &bounds) const = 0;
-	virtual void update(Window &win) = 0;
+	virtual void update(Window &win, const Rect &bounds) = 0;
 	virtual void free() = 0;
 };
 

@@ -42,6 +42,21 @@ void Window::renderRect(const Rect &bounds, const Color &color) {
 	SDL_RenderFillRect(renderer, &rect);
 }
 
+void Window::renderText(const Vec2 &pos, const char *text, const int ftsize, const Color &color, const int style) {
+	TTF_Font *font = ensureFont(ftsize);
+	SDL_Color fg = {color.r, color.g, color.b, color.a};
+	TTF_SetFontStyle(font, style);
+	SDL_Surface *surface = TTF_RenderText_Blended(font, text, fg);
+	SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_Rect dst;
+	dst.x = pos.x;
+	dst.y = pos.y;
+	SDL_QueryTexture(texture, NULL, NULL, &dst.w, &dst.h);
+	SDL_RenderCopy(renderer, texture, NULL, &dst);
+	SDL_FreeSurface(surface);
+	SDL_DestroyTexture(texture);
+}
+
 void Window::renderCircle(const Vec2 &pos, int radius, const Color &color) {
 	filledEllipseRGBA(renderer, pos.x, pos.y, radius, radius, color.r, color.g, color.b, color.a);
 }
@@ -59,6 +74,13 @@ TTF_Font *Window::ensureFont(int ftsize) {
 int Window::getFontHeight(int ftsize) {
 	TTF_Font *font = ensureFont(ftsize);
 	return TTF_FontHeight(font);
+}
+
+int Window::getTextWidth(const char *text, int ftsize) {
+	TTF_Font *font = ensureFont(ftsize);
+	int h = 0;
+	TTF_SizeText(font, text, NULL, &h);
+	return h;
 }
 
 void Window::clear(const Color &color) {
