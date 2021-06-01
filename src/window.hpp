@@ -25,8 +25,7 @@ struct Window {
 	bool running;
 	int w;
 	int h;
-	int mouseX = 0;
-	int mouseY = 0;
+	Vec2 mouse_pos = {0, 0};
 
 	Window(const char *title, int w, int h, const char *font_path);
 	~Window();

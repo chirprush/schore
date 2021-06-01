@@ -15,6 +15,8 @@ struct Rect {
 	int h;
 
 	constexpr Rect(Vec2 pos, int w, int h) : pos(pos), w(w), h(h) {}
+
+	bool contains(Vec2 &v) const;
 };
 
 

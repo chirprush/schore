@@ -78,9 +78,9 @@ int Window::getFontHeight(int ftsize) {
 
 int Window::getTextWidth(const char *text, int ftsize) {
 	TTF_Font *font = ensureFont(ftsize);
-	int h = 0;
-	TTF_SizeText(font, text, NULL, &h);
-	return h;
+	int w = 0;
+	TTF_SizeText(font, text, &w, NULL);
+	return w;
 }
 
 void Window::clear(const Color &color) {

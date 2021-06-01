@@ -20,15 +20,7 @@ int main(int argc, char *argv[]) {
 	Editor *ed = new Editor();
 	ed->children.push_back(it);
 	Ui ui = Ui(
-		new HorSplit(
-			new ColoredRect(BAR_COLOR),
-			new VertSplit(
-				new ColoredRect(SIDE_PANE_COLOR),
-				ed,
-				0.20f
-			),
-			0.05f
-		)
+		ed
 	);
 	Event e = {};
 	while (win.running) {
@@ -42,8 +34,8 @@ int main(int argc, char *argv[]) {
 				bounds.h = e.resize.h;
 				break;
 			case EventType::MouseMove:
-				win.mouseX = e.mouse_move.x;
-				win.mouseY = e.mouse_move.y;
+				win.mouse_pos.x = e.mouse_move.x;
+				win.mouse_pos.y = e.mouse_move.y;
 				break;
 			default:
 				break;

@@ -8,10 +8,13 @@
 #include "color.hpp"
 #include "widget.hpp"
 
-constexpr int ITEM_YPADDING = 2;
+constexpr int ITEM_YPADDING = 5;
 constexpr int ITEM_XPADDING = 10;
 
 constexpr int ITEM_INDENT = 30;
+
+constexpr int ITEM_FOCUSED_PADDING = 4;
+constexpr Color ITEM_FOCUSED_BG = 0x222526;
 
 constexpr Color TOPIC_FG = 0x61afef;
 constexpr Color TEXT_FG = 0xebdbef;
@@ -35,6 +38,9 @@ struct Item : Widget {
 
 	int height(Window &win) const;
 
+	int getFontSize() const;
+	int getIndent() const;
+
 	void render(Window &win, const Rect &bounds) const;
 	void update(Window &win, const Rect &bounds);
 	void free();
@@ -44,6 +50,7 @@ constexpr Color EDITOR_BG = 0x1d2021;
 
 struct Editor : Widget {
 	std::vector<Item> children;
+	bool focused = false;
 
 	Editor();
 
